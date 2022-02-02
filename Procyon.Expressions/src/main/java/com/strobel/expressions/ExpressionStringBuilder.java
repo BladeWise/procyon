@@ -582,7 +582,7 @@ final class ExpressionStringBuilder extends ExpressionVisitor {
     }
 
     @Override
-    public <T> LambdaExpression<T> visitLambda(final LambdaExpression<T> node) {
+    public <T> Expression visitLambda(final LambdaExpression<T> node) {
         final ParameterExpressionList parameters = node.getParameters();
 
         if (parameters.size() == 1) {

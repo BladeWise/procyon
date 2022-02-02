@@ -32,7 +32,7 @@ final class Optimizer extends ExpressionVisitor {
         return OPTIMIZER.visit(node);
     }
 
-    static <T> LambdaExpression<T> optimize(final LambdaExpression<T> node) {
+    static <T> Expression optimize(final LambdaExpression<T> node) {
         return OPTIMIZER.visitLambda(node);
     }
 
