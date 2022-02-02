@@ -1,5 +1,5 @@
 dependencies {
-    compile project(':Procyon.Core')
+    api project(':Procyon.Core')
 }
 
 /*

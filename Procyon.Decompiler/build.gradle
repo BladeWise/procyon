@@ -1,4 +1,7 @@
-uploadArchives.enabled = false
+plugins {
+    id 'java'
+}
+publish.enabled = false
 
 jar {
     manifest {
@@ -11,7 +14,7 @@ jar {
 }
 
 dependencies {
-    compile 'com.beust:jcommander:1.78'
-    compile project(':Procyon.Core')
-    compile project(':Procyon.CompilerTools')
+    api 'com.beust:jcommander:1.78'
+    api project(':Procyon.Core')
+    api project(':Procyon.CompilerTools')
 }
