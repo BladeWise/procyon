@@ -134,7 +134,8 @@ final class TypeCache {
         }
 
         public Key(final Type<?> type, final TypeList typeArguments) {
-            this.descriptor = type.getInternalName();
+            this.descriptor =
+                type.isArray() && type.getElementType().isGenericParameter() ? "[L" + type.getElementType().getInternalName() + ";" : type.getInternalName();
             this.typeArguments = typeArguments;
 
             int h = this.descriptor.hashCode();
