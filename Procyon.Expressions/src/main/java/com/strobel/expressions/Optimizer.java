@@ -32,8 +32,9 @@ final class Optimizer extends ExpressionVisitor {
         return OPTIMIZER.visit(node);
     }
 
-    static <T> Expression optimize(final LambdaExpression<T> node) {
-        return OPTIMIZER.visitLambda(node);
+    static <T> LambdaExpression<T> optimize(final LambdaExpression<T> node) {
+        final @SuppressWarnings("unchecked") LambdaExpression<T> lambda = (LambdaExpression<T>) OPTIMIZER.visitLambda(node);
+        return lambda;
     }
 
     @Override
@@ -52,7 +53,7 @@ final class Optimizer extends ExpressionVisitor {
 
         return super.visitBinary(node);
     }
-    
+
     @Override
     protected Expression visitUnary(final UnaryExpression node) {
         Expression reduced = reduceNullConstantCheck(node);
