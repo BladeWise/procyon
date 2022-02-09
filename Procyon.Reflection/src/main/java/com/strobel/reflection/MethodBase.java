@@ -13,8 +13,6 @@
 
 package com.strobel.reflection;
 
-import com.strobel.core.HashUtilities;
-
 /**
  * @author Mike Strobel
  */
@@ -34,15 +32,6 @@ public abstract class MethodBase extends MemberInfo {
     }
 
     public abstract boolean containsGenericParameter(final Type<?> genericParameter);
-
-    @Override
-    public int hashCode() {
-        int hash = super.hashCode();
-        for (final Type parameterType : getParameters().getParameterTypes()) {
-            hash = HashUtilities.combineHashCodes(hash, parameterType.hashCode());
-        }
-        return hash;
-    }
 
     @Override
     public boolean isEquivalentTo(final MemberInfo m) {

@@ -80,7 +80,7 @@ final class VariableBinder extends ExpressionVisitor {
     }
 
     @Override
-    public <T> Expression visitLambda(final LambdaExpression<T> node) {
+    public <T> LambdaExpression<T> visitLambda(final LambdaExpression<T> node) {
         final CompilerScope scope = new CompilerScope(node, true);
         final BoundConstants constants = new BoundConstants();
 

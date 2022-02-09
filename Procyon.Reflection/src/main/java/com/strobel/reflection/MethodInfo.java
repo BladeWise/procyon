@@ -16,7 +16,6 @@ package com.strobel.reflection;
 import com.strobel.annotations.NotNull;
 import com.strobel.core.ArrayUtilities;
 import com.strobel.core.Fences;
-import com.strobel.core.HashUtilities;
 import com.strobel.core.VerifyArgument;
 import com.strobel.util.ContractUtils;
 import com.strobel.util.TypeUtils;
@@ -32,24 +31,6 @@ import java.lang.reflect.TypeVariable;
  */
 public abstract class MethodInfo extends MethodBase {
     protected MethodInfo _erasedMethodDefinition;
-
-    static MethodInfo reflectedOn(final MethodInfo method, final Type<?> reflectedType) {
-        if (TypeUtils.areEquivalent(reflectedType, method.getReflectedType())) {
-            return method;
-        }
-
-        return new DelegatingMethodInfo(method, reflectedType);
-    }
-
-    static MethodInfo declaredOn(final MethodInfo method, final Type<?> declaringType, final Type<?> reflectedType) {
-        if (TypeUtils.areEquivalent(declaringType, method.getDeclaringType()) &&
-            TypeUtils.areEquivalent(reflectedType, method.getReflectedType())) {
-
-            return method;
-        }
-
-        return new DelegatingMethodInfo(method, declaringType, reflectedType);
-    }
 
     public final boolean isAbstract() {
         return Modifier.isAbstract(getModifiers());
@@ -99,13 +80,6 @@ public abstract class MethodInfo extends MethodBase {
     @Override
     public Annotation[] getDeclaredAnnotations() {
         return getRawMethod().getDeclaredAnnotations();
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = super.hashCode();
-        hash = HashUtilities.combineHashCodes(hash, getReturnType().hashCode());
-        return hash;
     }
 
     @Override
@@ -659,6 +633,24 @@ public abstract class MethodInfo extends MethodBase {
         }
 
         return new GenericMethod(bindings, this);
+    }
+
+    static MethodInfo reflectedOn(final MethodInfo method, final Type<?> reflectedType) {
+        if (TypeUtils.areEquivalent(reflectedType, method.getReflectedType())) {
+            return method;
+        }
+
+        return new DelegatingMethodInfo(method, reflectedType);
+    }
+
+    static MethodInfo declaredOn(final MethodInfo method, final Type<?> declaringType, final Type<?> reflectedType) {
+        if (TypeUtils.areEquivalent(declaringType, method.getDeclaringType()) &&
+            TypeUtils.areEquivalent(reflectedType, method.getReflectedType())) {
+
+            return method;
+        }
+
+        return new DelegatingMethodInfo(method, declaringType, reflectedType);
     }
 }
 

@@ -827,7 +827,7 @@ final class DebugViewWriter extends ExpressionVisitor {
     }
 
     @Override
-    protected <T> Expression visitLambda(final LambdaExpression<T> node) {
+    protected <T> LambdaExpression<T> visitLambda(final LambdaExpression<T> node) {
         out(
             format(
                 ".Lambda %s<%s>",

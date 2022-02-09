@@ -14,7 +14,6 @@
 package com.strobel.reflection;
 
 import com.strobel.annotations.NotNull;
-import com.strobel.core.HashUtilities;
 import com.strobel.core.VerifyArgument;
 import com.strobel.util.TypeUtils;
 
@@ -53,13 +52,6 @@ public abstract class FieldInfo extends MemberInfo {
     @Override
     public Annotation[] getDeclaredAnnotations() {
         return getRawField().getDeclaredAnnotations();
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = super.hashCode();
-        hash = HashUtilities.combineHashCodes(hash, getFieldType().hashCode());
-        return hash;
     }
 
     @Override
@@ -141,7 +133,7 @@ public abstract class FieldInfo extends MemberInfo {
             s.append(Modifier.STATIC.toString());
             s.append(' ');
         }
-
+        
         final Type fieldType = getFieldType();
 
         if (fieldType.isGenericParameter()) {
@@ -160,7 +152,7 @@ public abstract class FieldInfo extends MemberInfo {
     @Override
     public StringBuilder appendErasedDescription(final StringBuilder sb) {
         StringBuilder s = sb;
-
+        
         for (final javax.lang.model.element.Modifier modifier : Flags.asModifierSet(getModifiers())) {
             s.append(modifier.toString());
             s.append(' ');
